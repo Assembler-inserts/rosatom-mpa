@@ -10,7 +10,9 @@
     </head>
     <body>
         {% include "_menu.html.twig" %}
-        {% block body %}{% endblock %}
+        <div class="container">
+            {% block body %}{% endblock %}
+        </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
             <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>

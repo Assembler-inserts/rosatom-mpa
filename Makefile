@@ -15,6 +15,7 @@ install:
 	&& docker-compose exec php chown -R 1000:1000 ../symfony \
 	&& docker-compose exec -u www-data php composer install \
 	&& docker-compose exec -u www-data php bin/console assets:install \
+	&& docker-compose exec -u www-data php bin/console d:s:u --force \
 	&& docker-compose run --rm node yarn install \
 	&& docker-compose run --rm node yarn build
 

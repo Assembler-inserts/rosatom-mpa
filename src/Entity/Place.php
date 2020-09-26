@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PlaceRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -79,6 +81,16 @@ class Place
      * @Groups({"serialize", "place:write"})
      */
     private $area;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Container::class, mappedBy="place")
+     */
+    private $containers;
+
+    public function __construct()
+    {
+        $this->containers = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -201,6 +213,37 @@ class Place
     public function setArea(?Area $area): self
     {
         $this->area = $area;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Container[]
+     */
+    public function getContainers(): Collection
+    {
+        return $this->containers;
+    }
+
+    public function addContainer(Container $container): self
+    {
+        if (!$this->containers->contains($container)) {
+            $this->containers[] = $container;
+            $container->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeContainer(Container $container): self
+    {
+        if ($this->containers->contains($container)) {
+            $this->containers->removeElement($container);
+            // set the owning side to null (unless already changed)
+            if ($container->getPlace() === $this) {
+                $container->setPlace(null);
+            }
+        }
 
         return $this;
     }

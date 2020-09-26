@@ -19,32 +19,27 @@ class ContainerRepository extends ServiceEntityRepository
         parent::__construct($registry, Container::class);
     }
 
-    // /**
-    //  * @return Container[] Returns an array of Container objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findForList($filter): array
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $qb = $this->createQueryBuilder('c');
 
-    /*
-    public function findOneBySomeField($value): ?Container
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
+        if (isset($filter['status'])) {
+            $statuses = $filter['status'];
+        } else {
+            $statuses = array_values(Container::STATUSES);
+        }
+        $qb
+            ->andWhere('c.status IN (:statuses)')
+            ->setParameter('statuses', $statuses)
         ;
+
+        if (isset($filter['place'])) {
+            $qb
+                ->andWhere('c.place = :place')
+                ->setParameter('place', $filter['place'])
+            ;
+        }
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

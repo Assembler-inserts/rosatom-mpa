@@ -24,38 +24,20 @@ class Area
 
     /**
      * @ORM\ManyToOne(targetEntity=Building::class, inversedBy="areas")
-     * @Groups({"serialize", "area:write"})
+     * @Groups({"serialize", "area:write", "area:update"})
      */
     private $building;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Groups({"serialize", "area:write"})
-     */
-    private $x1;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Groups({"serialize", "area:write"})
-     */
-    private $x2;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Groups({"serialize", "area:write"})
-     */
-    private $y1;
-
-    /**
-     * @ORM\Column(type="float")
-     * @Groups({"serialize", "area:write"})
-     */
-    private $y2;
 
     /**
      * @ORM\OneToMany(targetEntity=Place::class, mappedBy="area")
      */
     private $places;
+
+    /**
+     * @Groups({"serialize", "area:write", "area:update"})
+     * @ORM\Column(type="string", length=255)
+     */
+    private $name;
 
     public function __construct()
     {
@@ -78,55 +60,7 @@ class Area
 
         return $this;
     }
-
-    public function getX1(): ?float
-    {
-        return $this->x1;
-    }
-
-    public function setX1(float $x1): self
-    {
-        $this->x1 = $x1;
-
-        return $this;
-    }
-
-    public function getX2(): ?float
-    {
-        return $this->x2;
-    }
-
-    public function setX2(float $x2): self
-    {
-        $this->x2 = $x2;
-
-        return $this;
-    }
-
-    public function getY1(): ?float
-    {
-        return $this->y1;
-    }
-
-    public function setY1(float $y1): self
-    {
-        $this->y1 = $y1;
-
-        return $this;
-    }
-
-    public function getY2(): ?float
-    {
-        return $this->y2;
-    }
-
-    public function setY2(float $y2): self
-    {
-        $this->y2 = $y2;
-
-        return $this;
-    }
-
+    
     /**
      * @return Collection|Place[]
      */
@@ -154,6 +88,18 @@ class Area
                 $place->setArea(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getName(): ?string
+    {
+        return $this->name;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
 
         return $this;
     }

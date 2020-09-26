@@ -14,20 +14,38 @@ use Symfony\Component\Serializer\Annotation\Groups;
  */
 class Container
 {
+    const STATUS_RESERVE = 'Reserve';
+    const STATUS_FILLING = 'Filling';
+    const STATUS_FILLED = 'Filled';
+    const STATUS_EMPTY = 'Empty';
+    const STATUS_READY_PRODUCT = 'Ready product';
+    
+    const STATUSES = [
+        self::STATUS_RESERVE => self::STATUS_RESERVE,
+        self::STATUS_EMPTY => self::STATUS_EMPTY,
+        self::STATUS_FILLED => self::STATUS_FILLED,
+        self::STATUS_FILLING => self::STATUS_FILLING,
+        self::STATUS_READY_PRODUCT => self::STATUS_READY_PRODUCT,
+    ];
+
+    const CONTENTS_MATERIAL = 'Material';
+    const CONTENTS_PRODUCT = 'Product';
+
     /**
      * @ORM\Id
-     * @ORM\GeneratedValue
+     * @ORM\GeneratedValue  
      * @ORM\Column(type="integer")
      * @Groups({"serialize"})
      */
     private $id;
 
     /**
+     * @Assert\Choice({"Reserve", "Filling", "Filled", "Empty", "Ready product"})
      * @ORM\Column(type="string", length=255, nullable=true)
      * @Groups({"serialize", "container:update"})
      */
     private $status;
-
+    
     /**
      * @ORM\Column(type="string", length=255)
      * @Groups({"serialize", "container:write", "container:update"})
@@ -56,6 +74,22 @@ class Container
      * @Groups({"serialize", "container:update"})
      */
     private $y;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="containers")
+     */
+    private $place;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $weight;
+
+    /**
+     * @Assert\Choice({"Material", "Product"})
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $contents;
 
     public function __construct()
     {
@@ -154,6 +188,42 @@ class Container
     public function setY(float $y): self
     {
         $this->y = $y;
+
+        return $this;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): self
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    public function getWeight(): ?int
+    {
+        return $this->weight;
+    }
+
+    public function setWeight(?int $weight): self
+    {
+        $this->weight = $weight;
+
+        return $this;
+    }
+
+    public function getContents(): ?string
+    {
+        return $this->contents;
+    }
+
+    public function setContents(?string $contents): self
+    {
+        $this->contents = $contents;
 
         return $this;
     }

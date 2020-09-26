@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Container{% endblock %}
+
+{% block body %}
+  <div class="row">
+    <div class="col-4">ID</div>
+    <div class="col-8">{{ container.id }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Number</div>
+    <div class="col-8">{{ container.number }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Status</div>
+    <div class="col-8">{{ container.status }}</div>
+  </div>
+  <div class="row">
+    <div class="col-4">Contents</div>
+    <div class="col-8">{{ container.contents }}</div>
+  </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Containers!{% endblock %}
+
+{% block body %}
+
+{{ form(form) }}
+
+<table class="table mt-4">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Number</th>
+      <th>Status</th>
+      <th>Place</th>
+      <th>Weight</th>
+      <th>Contents</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for container in containers %}
+    <tr>
+      <td>{{ container.id }}</td>
+      <td>
+        <a href="{{ path('container_show', {id: container.id}) }}">{{ container.number }}</a>
+      </td>
+      <td>{{ container.status }}</td>
+      <td>{{ container.place.name }}</td>
+      <td>{{ container.weight }}</td>
+      <td>{{ container.contents }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
