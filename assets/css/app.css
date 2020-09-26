@@ -1,0 +1,14 @@
+body {
+    background-color: white;
+}
+
+.map {
+    position: relative;
+}
+
+.point {
+    background-color: red;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+}
