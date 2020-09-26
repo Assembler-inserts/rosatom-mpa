@@ -22,8 +22,9 @@ See other commands in 'Makefile'
 ```
 $ make up
 ```
-You can access:
-APP endpoint - {host}:8000
-API endpoint - {host}:8000/api
-API documentation on - {host}:8000/doc
-Database client - {host}:8080
+You can access:  
+
+- APP endpoint - {host}:8000  
+- API endpoint - {host}:8000/api  
+- API documentation on - {host}:8000/doc  
+- Database client - {host}:8080  
