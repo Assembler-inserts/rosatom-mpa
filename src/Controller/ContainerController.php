@@ -46,14 +46,14 @@ class ContainerController extends AbstractController
      */
     public function show(int $id): Response
     {
-        $article = $this->containerRepository->find($id);
+        $container = $this->containerRepository->find($id);
 
-        if (!$article) {
+        if (!$container) {
             throw new NotFoundHttpException();
         }
 
         return $this->render('container/show.html.twig', [
-            'article' => $article,
+            'container' => $container,
         ]);
     }
 }
