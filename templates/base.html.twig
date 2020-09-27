@@ -4,7 +4,6 @@
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}
-            <link href="https://unpkg.com/ionicons@4.5.9-1/dist/css/ionicons.min.css" rel="stylesheet">
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
@@ -15,7 +14,6 @@
         </div>
         {% block javascripts %}
             {{ encore_entry_script_tags('app') }}
-            <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
         {% endblock %}
     </body>
 </html>

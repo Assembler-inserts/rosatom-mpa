@@ -21,7 +21,7 @@ class FilterType extends AbstractType
         $builder
             ->add('number', null, [
                 'attr' => [
-                    'placeholder' => 'User email',
+                    'placeholder' => 'Container number',
                 ],
             ])
             ->add('status', ChoiceType::class, [
@@ -31,7 +31,9 @@ class FilterType extends AbstractType
             ->add('place', EntityType::class, [
                 'class' => Place::class,
                 'choice_label' => 'name',
+                'placeholder' => 'Choice place',
             ])
+            ->add('Search', SubmitType::class)
         ;
     }
 

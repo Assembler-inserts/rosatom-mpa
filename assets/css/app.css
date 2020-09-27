@@ -1,14 +1,25 @@
-body {
-    background-color: white;
-}
-
-.map {
+.map__building {
     position: relative;
+    height: 500px;
+    width: 500px;
+    background-image: url("../images/map.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin: 0 auto;
 }
 
-.point {
+.map__loader {
+    position: absolute;
     background-color: red;
     width: 20px;
     height: 20px;
+}
+
+.map__container {
     position: absolute;
+    background-color: white;
+    border: 1px solid grey;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
 }

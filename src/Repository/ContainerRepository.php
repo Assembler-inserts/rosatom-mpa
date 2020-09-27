@@ -33,6 +33,13 @@ class ContainerRepository extends ServiceEntityRepository
             ->setParameter('statuses', $statuses)
         ;
 
+        if (isset($filter['number'])) {
+            $qb
+                ->andWhere('c.number = :number')
+                ->setParameter('number', $filter['number'])
+            ;
+        }
+
         if (isset($filter['place'])) {
             $qb
                 ->andWhere('c.place = :place')

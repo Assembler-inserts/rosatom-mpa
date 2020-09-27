@@ -11,12 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MapController extends AbstractController
 {
-    public function __construct()
-    {
-    }
-
     /**
-     * @Route("/map", name="map_index")
+     * @Route("/", name="map_index")
      */
     public function index(
     ): Response {
